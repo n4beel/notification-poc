@@ -2,20 +2,23 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import * as PusherPushNotifications from "@pusher/push-notifications-web";
 import { useEffect } from "react";
+import Pusher from "pusher-js";
 
 export default function Home() {
 
   useEffect(() => {
-    const beamsClient = new PusherPushNotifications.Client({
-      instanceId: '',
+
+    Pusher.logToConsole = true;
+    const pusher = new Pusher('9a3f2c1adf61a66482d2', {
+      cluster: 'ap4',
     });
 
-    beamsClient.start()
-      .then(() => beamsClient.addDeviceInterest('684ab37f156a5b55e993e9b4')) // use user's id here
-      .then(() => console.log('Successfully registered and subscribed!'))
-      .catch(console.error);
+    var channel = pusher.subscribe('684c08d7c12527a854fd2128');
+    channel.bind('notification', function (data: any) {
+      alert(JSON.stringify(data));
+    });
+
   }, [])
 
 
