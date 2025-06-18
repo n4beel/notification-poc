@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
 
     Pusher.logToConsole = true;
-    const pusher = new Pusher('9a3f2c1adf61a66482d2', {
+    const pusher = new Pusher('', {
       cluster: 'ap4',
     });
 
